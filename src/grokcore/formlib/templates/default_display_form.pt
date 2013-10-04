@@ -26,7 +26,12 @@
     <tfoot>
       <tr class="controls">
         <td colspan="2" class="align-right">
-          <input tal:repeat="action view/actions" 
+          <input type="hidden"
+            name="___csrftoken__"
+            tal:condition="view/protected"
+            tal:attributes="value view/csrftoken"
+          />
+          <input tal:repeat="action view/actions"
             tal:replace="structure action/render" />
         </td>
       </tr>
