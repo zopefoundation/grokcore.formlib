@@ -58,7 +58,7 @@
 
   <div id="actionsView">
     <input type="hidden"
-      name="___csrftoken__"
+      name="__csrftoken__"
       tal:condition="view/protected"
       tal:attributes="value view/csrftoken"
     />
