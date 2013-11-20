@@ -46,7 +46,7 @@ setup(
                       'pytz',
                       'zope.container',
                       'zope.event',
-                      'zope.formlib',
+                      'zope.formlib >= 4.3.0a2.dev0',
                       'zope.interface',
                       'zope.lifecycleevent',
                       'zope.publisher',
