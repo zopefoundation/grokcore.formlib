@@ -57,6 +57,11 @@
   </table>
 
   <div id="actionsView">
+    <input type="hidden"
+      name="__csrftoken__"
+      tal:condition="view/protected"
+      tal:attributes="value view/csrftoken"
+    />
     <span class="actionButtons" tal:condition="view/availableActions">
       <input tal:repeat="action view/actions"
              tal:replace="structure action/render"
