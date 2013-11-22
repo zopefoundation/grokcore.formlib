@@ -4,14 +4,12 @@ Changes
 1.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Add compatibility for CSRF protection feature in zope.formlib.
 
 1.9 (2012-05-01)
 ----------------
 
 - Nothing changed yet.
-
 
 1.8 (2010-11-03)
 ----------------
@@ -59,7 +57,6 @@ Changes
 * Use 1.0b1 versions.cfg in Grok's release info instead of a local
   copy; a local copy for all grokcore packages is just too hard to
   maintain.
-
 
 1.2 (2009-07-20)
 ----------------
