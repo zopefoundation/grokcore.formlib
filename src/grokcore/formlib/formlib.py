@@ -14,12 +14,16 @@
 """Custom implementations of formlib helpers
 """
 
-from zope import interface, event, lifecycleevent
 from zope.interface.interfaces import IInterface
-from zope.formlib import form
 from zope.schema.interfaces import IField
+from grokcore.content import ObjectEditedEvent
+import zope.event
+import zope.formlib.form
+import zope.interface
+import zope.lifecycleevent
 
-class action(form.action):
+
+class action(zope.formlib.form.action):
     """We override the action decorator we pass in our custom Action.
     """
     def __call__(self, success):
@@ -27,10 +31,12 @@ class action(form.action):
         self.actions.append(action)
         return action
 
-class Action(form.Action):
+
+class Action(zope.formlib.form.Action):
     def success(self, data):
         if self.success_handler is not None:
             return self.success_handler(self.form, **data)
+
 
 def Fields(*args, **kw):
     fields = []
@@ -40,22 +46,24 @@ def Fields(*args, **kw):
             fields.append(value)
             del kw[key]
     fields.sort(key=lambda field: field.order)
-    return form.Fields(*(args + tuple(fields)), **kw)
+    return zope.formlib.form.Fields(*(args + tuple(fields)), **kw)
+
 
 def get_auto_fields(context):
     """Get the form fields for context.
     """
     # for an interface context, we generate them from that interface
     if IInterface.providedBy(context):
-        return form.Fields(context)
+        return zope.formlib.form.Fields(context)
     # if we have a non-interface context, we're autogenerating them
     # from any schemas defined by the context
-    fields = form.Fields(*most_specialized_interfaces(context))
+    fields = zope.formlib.form.Fields(*most_specialized_interfaces(context))
     # we pull in this field by default, but we don't want it in our form
     fields = fields.omit('__name__')
     return fields
 
 AutoFields = get_auto_fields
+
 
 def most_specialized_interfaces(context):
     """Get interfaces for an object without any duplicates.
@@ -65,13 +73,14 @@ def most_specialized_interfaces(context):
     interface twice, as that would result in duplicate names when creating
     the form.
     """
-    declaration = interface.implementedBy(context)
+    declaration = zope.interface.implementedBy(context)
     seen = []
     for iface in declaration.flattened():
         if interface_seen(seen, iface):
             continue
         seen.append(iface)
     return seen
+
 
 def interface_seen(seen, iface):
     """Return True if interface already is seen.
@@ -80,6 +89,7 @@ def interface_seen(seen, iface):
         if seen_iface.extends(iface):
             return True
     return False
+
 
 def apply_data(context, form_fields, data, adapters=None, update=False):
     """Save form data (``data`` dict) on a ``context`` object.
@@ -111,7 +121,7 @@ def apply_data(context, form_fields, data, adapters=None, update=False):
             adapters[interface] = adapter
 
         name = form_field.__name__
-        newvalue = data.get(name, form_field) # using form_field as marker
+        newvalue = data.get(name, form_field)  # using form_field as marker
 
         if update:
             if ((newvalue is not form_field) and
@@ -125,6 +135,7 @@ def apply_data(context, form_fields, data, adapters=None, update=False):
 
     return changes
 
+
 def apply_data_event(context, form_fields, data, adapters=None, update=False):
     """Like apply_data, but also sends an IObjectModifiedEvent.
     """
@@ -133,7 +144,8 @@ def apply_data_event(context, form_fields, data, adapters=None, update=False):
     if changes:
         descriptions = []
         for interface, names in changes.items():
-            descriptions.append(lifecycleevent.Attributes(interface, *names))
-        event.notify(lifecycleevent.ObjectModifiedEvent(context, *descriptions))
+            descriptions.append(
+                zope.lifecycleevent.Attributes(interface, *names))
+        zope.event.notify(ObjectEditedEvent(context, *descriptions))
 
     return changes

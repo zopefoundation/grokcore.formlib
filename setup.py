@@ -1,6 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
+
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
@@ -34,13 +35,14 @@ setup(
         'Framework :: Zope3',
         ],
     packages=find_packages('src'),
-    package_dir = {'': 'src'},
+    package_dir={'': 'src'},
     namespace_packages=['grokcore'],
-    include_package_data = True,
+    include_package_data=True,
     zip_safe=False,
     install_requires=[
         'setuptools',
         'grokcore.component >= 2.1',
+        'grokcore.content',
         'grokcore.security >= 1.5',
         'grokcore.view >= 2.0',
         'martian >= 0.13',

@@ -4,7 +4,7 @@ Changes
 1.10a2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Forms now notify the ObjectEditedEvent instead of the ObjectModifiedEvent.
 
 
 1.10a1 (2013-11-22)
