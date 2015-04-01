@@ -42,7 +42,7 @@ setup(
     install_requires=[
         'setuptools',
         'grokcore.component >= 2.1',
-        'grokcore.content',
+        'grokcore.content >= 1.2',
         'grokcore.security >= 1.5',
         'grokcore.view >= 2.0',
         'martian >= 0.13',
