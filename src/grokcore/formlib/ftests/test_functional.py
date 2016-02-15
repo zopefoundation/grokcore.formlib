@@ -1,10 +1,11 @@
+import doctest
 import re
 import unittest
-import grokcore.formlib
-
 from pkg_resources import resource_listdir
-from zope.testing import doctest, renormalizing
+
+from zope.testing import renormalizing
 from zope.app.wsgi.testlayer import BrowserLayer
+import grokcore.formlib
 
 FunctionalLayer = BrowserLayer(grokcore.formlib)
 
@@ -28,14 +29,15 @@ def suiteFromPackage(name):
             dottedname,
             checker=checker,
             extraglobs=dict(getRootFolder=FunctionalLayer.getRootFolder),
-            optionflags=(doctest.ELLIPSIS+
-                         doctest.NORMALIZE_WHITESPACE+
+            optionflags=(doctest.ELLIPSIS +
+                         doctest.NORMALIZE_WHITESPACE +
                          doctest.REPORT_NDIFF)
             )
         test.layer = FunctionalLayer
 
         suite.addTest(test)
     return suite
+
 
 def test_suite():
     suite = unittest.TestSuite()
