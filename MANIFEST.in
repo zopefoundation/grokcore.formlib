@@ -1,3 +1,7 @@
-recursive-include src/grokcore/formlib *.*
+global-include *.mo
 include *.txt
-global-exclude *pyc
+include *.rst
+include bootstrap.py
+include buildout.cfg
+include .travis.yml
+recursive-include src *.pt *.py *.zcml
