@@ -33,9 +33,33 @@ class action(zope.formlib.form.action):
 
 
 class Action(zope.formlib.form.Action):
+
+    def validate(self, data):
+        errors = super(Action, self).validate(data)
+        if errors is None:
+            errors = self.form.validate(self, data)
+        errors.extend(ensure_required_fields_have_input(
+            self.form.widgets, data))
+        return errors
+
     def success(self, data):
         if self.success_handler is not None:
             return self.success_handler(self.form, **data)
+
+
+def ensure_required_fields_have_input(widgets, data):
+    errors = []
+    for widget in widgets:
+        if not widget.context.required or widget.hasInput():
+            continue
+        name = widget.context.__name__
+        error = zope.formlib.interfaces.WidgetInputError(
+            name,
+            widget.label,
+            zope.schema.interfaces.RequiredMissing(name))
+        widget._error = error
+        errors.append(error)
+    return errors
 
 
 def Fields(*args, **kw):
@@ -125,7 +149,7 @@ def apply_data(context, form_fields, data, adapters=None, update=False):
 
         if update:
             if ((newvalue is not form_field) and
-                (field.get(adapter) != newvalue)):
+                    (field.get(adapter) != newvalue)):
                 field.set(adapter, newvalue)
                 changes.setdefault(interface, []).append(name)
         else:
