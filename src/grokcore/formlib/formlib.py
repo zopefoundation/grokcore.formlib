@@ -15,6 +15,7 @@
 """
 
 from zope.interface.interfaces import IInterface
+from zope.formlib.interfaces import IInputWidget
 from zope.schema.interfaces import IField
 from grokcore.content import ObjectEditedEvent
 import zope.event
@@ -50,6 +51,8 @@ class Action(zope.formlib.form.Action):
 def ensure_required_fields_have_input(widgets, data):
     errors = []
     for widget in widgets:
+        if not IInputWidget.providedBy(widget):
+            continue
         if not widget.context.required or widget.hasInput():
             continue
         name = widget.context.__name__
