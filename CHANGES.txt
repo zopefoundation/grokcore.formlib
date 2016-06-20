@@ -1,8 +1,8 @@
 Changes
 =======
 
-1.10.2 (unreleased)
--------------------
+1.11 (2016-06-20)
+-----------------
 
 - ``grok.action`` will now trigger validation errors
   ``RequiredMissing`` for required fields that not present at all in
