@@ -18,7 +18,7 @@ import datetime
 import warnings
 import pytz
 
-from zope.interface import implementsOnly
+from zope.interface import implementer_only
 from zope.interface.common import idatetime
 from zope.publisher.publish import mapply
 from zope.formlib import form
@@ -91,11 +91,11 @@ class GrokForm(object):
         return self.render()
 
 
+@implementer_only(IGrokForm)
 class Form(GrokForm, form.FormBase, View):
     # We're only reusing the form implementation from zope.formlib, we
     # explicitly don't want to inherit the interface semantics (mostly
     # for the different meanings of update/render).
-    implementsOnly(IGrokForm)
 
     template = default_form_template
 
@@ -115,11 +115,11 @@ class AddForm(Form):
     pass
 
 
+@implementer_only(IGrokForm)
 class EditForm(GrokForm, form.EditFormBase, View):
     # We're only reusing the form implementation from zope.formlib, we
     # explicitly don't want to inherit the interface semantics (mostly
     # for the different meanings of update/render).
-    implementsOnly(IGrokForm)
 
     template = default_form_template
 
@@ -152,10 +152,10 @@ class EditForm(GrokForm, form.EditFormBase, View):
             self.status = 'No changes'
 
 
+@implementer_only(IGrokForm)
 class DisplayForm(GrokForm, form.DisplayFormBase, View):
     # We're only reusing the form implementation from zope.formlib, we
     # explicitly don't want to inherit the interface semantics (mostly
     # for the different meanings of update/render).
-    implementsOnly(IGrokForm)
 
     template = default_display_template
