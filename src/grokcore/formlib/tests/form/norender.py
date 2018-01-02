@@ -5,9 +5,9 @@ EditForm has an explicit template associate with it.
   >>> grok.testing.grok(__name__)
   Traceback (most recent call last):
   ...
-  martian.error.GrokError: It is not allowed to specify a custom 'render'
-  method for form <class 'grokcore.formlib.tests.form.norender.Edit'>. Forms
-  either use the default template or a custom-supplied one.
+  martian.error.GrokError: It is not allowed to specify a custom 'render' \
+  method for form <class 'grokcore.formlib.tests.form.norender.Edit'>. \
+  Forms either use the default template or a custom-supplied one.
 
 """
 

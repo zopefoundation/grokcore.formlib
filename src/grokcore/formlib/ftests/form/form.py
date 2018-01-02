@@ -37,10 +37,10 @@ over POST requests::
   ...    "form.name=Manfred&form.size=Big&form.actions.apply=Apply")
   Traceback (most recent call last):
   ...
-  zope.publisher.interfaces.http.MethodNotAllowed:
-  <grokcore.formlib.ftests.form.form.Mammoth object at ...>,
-  <zope.publisher.browser.BrowserRequest
-  instance URL=http://localhost/manfred/@@editprotected>
+  zope.publisher.interfaces.http.MethodNotAllowed: \
+  <grokcore.formlib.ftests.form.form.Mammoth object at ...>, \
+  <zope.publisher.browser.BrowserRequest instance \
+  URL=http://localhost/manfred/@@editprotected>
 
 When CSRF protection is enabled, the corresponding hidden form field is
 rendered by the form templates::
