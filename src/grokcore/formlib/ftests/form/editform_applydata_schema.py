@@ -8,7 +8,7 @@ we test the whole procedure on fields from schemas:
 
   >>> getRootFolder()["manfred"] = Mammoth('Manfred the Mammoth', 'Really big')
 
-  >>> from zope.app.wsgi.testlayer import Browser
+  >>> from zope.testbrowser.wsgi import Browser
   >>> browser = Browser()
   >>> browser.handleErrors = False
 
@@ -55,15 +55,16 @@ And finally let's change both fields:
 
 """
 import grokcore.formlib as grok
-from zope import schema, interface
+from zope import schema
+from zope.interface import Interface, implementer
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
-class IMammoth(interface.Interface):
+class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size")
 
+@implementer(IMammoth)
 class Mammoth(grok.testing.Model):
-    grok.implements(IMammoth)
     grok.testing.protect_get(grok.Public, 'name', 'size')
     grok.testing.protect_set(grok.Public, 'name', 'size')
 
@@ -74,14 +75,14 @@ class Mammoth(grok.testing.Model):
     def getName(self):
         return self._name
     def setName(self, value):
-        print "The 'name' property is being set."
+        print("The 'name' property is being set.")
         self._name = value
     name = property(getName, setName)
 
     def getSize(self):
         return self._size
     def setSize(self, value):
-        print "The 'size' property is being set."
+        print("The 'size' property is being set.")
         self._size = value
     size = property(getSize, setSize)
 
@@ -90,7 +91,7 @@ class Edit(grok.EditForm):
 
 @grok.subscribe(Mammoth, IObjectModifiedEvent)
 def notify_change_event(mammoth, event):
-    print ("An IObjectModifiedEvent was sent for a mammoth with the "
-           "following changes:")
+    print("An IObjectModifiedEvent was sent for a mammoth with the "
+          "following changes:")
     for descr in event.descriptions:
-        print descr.interface.__name__ + ": " + ", ".join(descr.attributes)
+        print(descr.interface.__name__ + ": " + ", ".join(descr.attributes))

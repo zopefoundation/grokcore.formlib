@@ -3,9 +3,9 @@ A grok.Model may implement one or more interfaces that are schemas:
 
   >>> grok.testing.grok(__name__)
   >>> manfred = Mammoth()
-  >>> print manfred.name
+  >>> print(manfred.name)
   None
-  >>> print manfred.size
+  >>> print(manfred.size)
   Quite normal
 
 A grok.EditForm is a special grok.View that renders an edit form.
@@ -39,45 +39,40 @@ will be retrieved from that interface, and that interface only:
 
 """
 import grokcore.formlib as grok
-from zope import interface, schema
+from zope import schema
+from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 
-class IMammoth(interface.Interface):
+class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
-
+@implementer(IMammoth)
 class Mammoth(grok.Context):
-    interface.implements(IMammoth)
 
-    name = FieldProperty(IMammoth['name'])    
+    name = FieldProperty(IMammoth['name'])
     size = FieldProperty(IMammoth['size'])
-
 
 class Edit(grok.EditForm):
     grok.context(Mammoth)
 
-
-class IMovieCharacter(interface.Interface):
+class IMovieCharacter(Interface):
     can_talk = schema.Bool(title=u'Can talk', default=False)
 
-
+@implementer(IMovieCharacter)
 class Manfred(Mammoth):
-    interface.implements(IMovieCharacter)
-
+    pass
 
 class Edit2(grok.EditForm):
     grok.context(Manfred)
-    
 
-class IYetAnotherMammoth(interface.Interface):
+class IYetAnotherMammoth(Interface):
     alpha = schema.TextLine(title=u'alpha')
     beta = schema.TextLine(title=u'beta')
 
-
+@implementer(IYetAnotherMammoth)
 class YetAnotherMammoth(grok.Context):
-    interface.implements(IYetAnotherMammoth)
-
+    pass
 
 class Edit4(grok.EditForm):
     grok.context(IYetAnotherMammoth)

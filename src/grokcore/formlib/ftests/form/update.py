@@ -4,15 +4,14 @@ form processing has happened:
 
   >>> getRootFolder()["manfred"] = Mammoth()
 
-  >>> from zope.app.wsgi.testlayer import Browser
+  >>> from zope.testbrowser.wsgi import Browser
   >>> browser = Browser()
   >>> browser.handleErrors = False
   >>> browser.open("http://localhost/manfred/edit")
   >>> browser.getControl(name="form.name").value = "Ellie"
   >>> browser.getControl("Apply").click()
-
   >>> browser.open("http://localhost/manfred")
-  >>> print browser.contents
+  >>> print(browser.contents)
   Ellie, the Mammoth reports: The form's update() was called and my name was Manfred.
 
 A form's update() method can issue a redirect.  In that case, the form
@@ -21,12 +20,12 @@ won't proceed to do any form processing nor rendering:
   >>> browser.open("http://localhost/manfred/editredirect")
   >>> browser.getControl(name="form.name").value = "Mallie"
   >>> browser.getControl("Apply").click()
-  >>> print browser.url
+  >>> print(browser.url)
   http://localhost/manfred/index
 
 Because of the redirect, no changes happened to the edited object:
 
-  >>> print browser.contents
+  >>> print(browser.contents)
   Ellie, the Mammoth reports: The form's update() was called and my name was Manfred.
 
 A form's update() method may also take arbitrary parameters that will
@@ -38,20 +37,20 @@ be filled with values from the request (such as form values):
   >>> browser.getControl("Apply").click()
 
   >>> browser.open("http://localhost/manfred")
-  >>> print browser.contents
+  >>> print(browser.contents)
   Mallie, the Mammoth reports: Request argument dispatch to update() works.
 
 """
 import grokcore.formlib as grok
 from zope import schema
 
-from zope.interface import Interface, implements
+from zope.interface import Interface, implementer
 
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
 
+@implementer(IMammoth)
 class Mammoth(grok.testing.Model):
-    implements(IMammoth)
     grok.testing.protect_get(grok.Public, 'name', 'report')
     grok.testing.protect_set(grok.Public, 'name', 'report')
 

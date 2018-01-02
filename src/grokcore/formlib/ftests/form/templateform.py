@@ -5,41 +5,41 @@ associated with them. Otherwise, the supplied template is used.
   >>> from zope.publisher.browser import TestRequest
   >>> request = TestRequest()
   >>> from zope import component
-  
+
 Default edit template:
 
   >>> view = component.getMultiAdapter((Mammoth(), request), name='edit')
-  >>> print view()
+  >>> print(view())
   <html>...
-  
+
 Custom edit template:
 
   >>> view = component.getMultiAdapter((Mammoth(), request), name='edit2')
-  >>> print view()
+  >>> print(view())
   <p>Test edit</p>
 
 Custom edit template with an explicit template
 
   >>> view = component.getMultiAdapter((Mammoth(), request), name='edit3')
-  >>> print view()
+  >>> print(view())
   <p>Test edit</p>
 
 Default display template:
 
   >>> view = component.getMultiAdapter((Mammoth(), request), name='display')
-  >>> print view()
+  >>> print(view())
   <html>...
-  
+
 Custom display template:
 
   >>> view = component.getMultiAdapter((Mammoth(), request), name='display2')
-  >>> print view()
+  >>> print(view())
   <p>Test display</p>
 
 Custom display template with an explicit template:
 
   >>> view = component.getMultiAdapter((Mammoth(), request), name='display3')
-  >>> print view()
+  >>> print(view())
   <p>Test display</p>
 
 """

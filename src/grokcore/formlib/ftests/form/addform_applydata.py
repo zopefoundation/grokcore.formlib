@@ -5,7 +5,7 @@ going to be set on it.
 
   >>> getRootFolder()["zoo"] = Zoo()
 
-  >>> from zope.app.wsgi.testlayer import Browser
+  >>> from zope.testbrowser.wsgi import Browser
   >>> browser = Browser()
   >>> browser.handleErrors = False
 
@@ -19,16 +19,17 @@ the object has been modified:
   >>> browser.getControl("Add entry").click()
   An IObjectModifiedEvent was sent for a mammoth with the following changes:
   IMammoth: name, size
-  >>> print browser.contents
+  >>> print(browser.contents)
   There were changes according to applyData.
 
   >>> browser.open("http://localhost/zoo/ellie")
-  >>> print browser.contents
+  >>> print(browser.contents)
   Hi, my name is Ellie the Mammoth, and I\'m "Really small"
 
 """
 import grokcore.formlib as grok
-from zope import schema, interface
+from zope import schema
+from zope.interface import Interface, implementer
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 from zope.container.btree import BTreeContainer
 from zope.container.interfaces import IContainer
@@ -36,12 +37,12 @@ from zope.container.interfaces import IContainer
 class Zoo(grok.testing.Model, BTreeContainer):
     grok.testing.protect_get(grok.Public, *IContainer)
 
-class IMammoth(interface.Interface):
+class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size")
 
+@implementer(IMammoth)
 class Mammoth(grok.testing.Model):
-    grok.implements(IMammoth)
     grok.testing.protect_get(grok.Public, 'name', 'size')
     grok.testing.protect_set(grok.Public, 'name', 'size')
 
@@ -65,7 +66,7 @@ class AddMammoth(grok.AddForm):
 
 @grok.subscribe(Mammoth, IObjectModifiedEvent)
 def notify_change_event(mammoth, event):
-    print ("An IObjectModifiedEvent was sent for a mammoth with the "
-           "following changes:")
+    print("An IObjectModifiedEvent was sent for a mammoth with the "
+          "following changes:")
     for descr in event.descriptions:
-        print descr.interface.__name__ + ": " + ", ".join(descr.attributes)
+        print(descr.interface.__name__ + ": " + ", ".join(descr.attributes))

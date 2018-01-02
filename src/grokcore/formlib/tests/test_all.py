@@ -1,10 +1,10 @@
 import doctest
 import re
 import unittest
-from pkg_resources import resource_listdir
-
-from zope.testing import cleanup, renormalizing
 import zope.component.eventtesting
+
+from pkg_resources import resource_listdir
+from zope.testing import cleanup, renormalizing
 
 
 def setUpZope(test):
@@ -13,6 +13,7 @@ def setUpZope(test):
 
 def cleanUpZope(test):
     cleanup.cleanUp()
+
 
 checker = renormalizing.RENormalizing([
     # str(Exception) has changed from Python 2.4 to 2.5 (due to
@@ -33,15 +34,16 @@ def suiteFromPackage(name):
             continue
         if filename == '__init__.py':
             continue
-
         dottedname = 'grokcore.formlib.tests.%s.%s' % (name, filename[:-3])
         test = doctest.DocTestSuite(
             dottedname,
             setUp=setUpZope,
             tearDown=cleanUpZope,
             checker=checker,
-            optionflags=doctest.ELLIPSIS + doctest.NORMALIZE_WHITESPACE)
-
+            optionflags=(
+                doctest.ELLIPSIS +
+                doctest.NORMALIZE_WHITESPACE +
+                renormalizing.IGNORE_EXCEPTION_MODULE_IN_PYTHON2))
         suite.addTest(test)
     return suite
 

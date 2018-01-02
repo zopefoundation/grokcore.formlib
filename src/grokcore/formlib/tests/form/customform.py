@@ -18,14 +18,16 @@ We only expect a single field to be present in the form, as we omitted 'size':
 """
 
 import grokcore.formlib as grok
-from zope import interface, schema
+from zope import schema
+from zope.interface import Interface, implementer
 
-class IMammoth(interface.Interface):
+class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
+@implementer(IMammoth)
 class Mammoth(grok.Context):
-    interface.implements(IMammoth)
+    pass
 
 class Edit(grok.EditForm):
     grok.context(Mammoth)

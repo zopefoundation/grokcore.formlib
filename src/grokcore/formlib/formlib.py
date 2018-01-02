@@ -67,7 +67,7 @@ def ensure_required_fields_have_input(widgets, data):
 
 def Fields(*args, **kw):
     fields = []
-    for key, value in kw.items():
+    for key, value in list(kw.items()):
         if IField.providedBy(value):
             value.__name__ = key
             fields.append(value)

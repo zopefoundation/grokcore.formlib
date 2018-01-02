@@ -32,17 +32,19 @@ With AutoFields:
   ['name', 'size', 'speciality']
 """
 import grokcore.formlib as grok
-from zope import interface, schema
+from zope import schema
+from zope.interface import Interface, implementer
 
-class IMammoth(interface.Interface):
+class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
 class ISpecialMammoth(IMammoth):
     speciality = schema.TextLine(title=u"Speciality")
 
+@implementer(ISpecialMammoth)
 class Mammoth(grok.Context):
-    interface.implements(ISpecialMammoth)
+    pass
 
 class Edit(grok.EditForm):
     grok.context(Mammoth)
@@ -53,12 +55,13 @@ class Edit2(grok.EditForm):
     form_fields = grok.AutoFields(Mammoth)
 
 # situation where subclass implements something on top of base class
+@implementer(IMammoth)
 class AnotherMammoth(grok.Context):
-    interface.implements(IMammoth)
+    pass
 
+@implementer(ISpecialMammoth)
 class YetAnotherMammoth(AnotherMammoth):
-    interface.implements(ISpecialMammoth)
+    pass
 
 class Edit3(grok.EditForm):
     grok.context(YetAnotherMammoth)
-

@@ -5,7 +5,7 @@ the object that need to be changed.
 
   >>> getRootFolder()["manfred"] = Mammoth('Manfred the Mammoth', 'Really big')
 
-  >>> from zope.app.wsgi.testlayer import Browser
+  >>> from zope.testbrowser.wsgi import Browser
   >>> browser = Browser()
   >>> browser.handleErrors = False
 
@@ -66,14 +66,14 @@ class Mammoth(grok.testing.Model):
     def getName(self):
         return self._name
     def setName(self, value):
-        print "The 'name' property is being set."
+        print("The 'name' property is being set.")
         self._name = value
     name = property(getName, setName)
 
     def getSize(self):
         return self._size
     def setSize(self, value):
-        print "The 'size' property is being set."
+        print("The 'size' property is being set.")
         self._size = value
     size = property(getSize, setSize)
 
@@ -86,7 +86,7 @@ class Edit(grok.EditForm):
 
 @grok.subscribe(Mammoth, IObjectModifiedEvent)
 def notify_change_event(mammoth, event):
-    print ("An IObjectModifiedEvent was sent for a mammoth with the "
-           "following changes:")
+    print("An IObjectModifiedEvent was sent for a mammoth with the "
+          "following changes:")
     for descr in event.descriptions:
-        print ", ".join(descr.attributes)
+        print(", ".join(descr.attributes))
