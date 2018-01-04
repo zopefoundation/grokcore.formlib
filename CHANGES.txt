@@ -4,8 +4,7 @@ Changes
 1.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Python 3 compatibility.
 
 1.11 (2016-06-20)
 -----------------
@@ -14,18 +13,15 @@ Changes
   ``RequiredMissing`` for required fields that not present at all in
   the request.
 
-
 1.10.1 (2016-02-15)
 -------------------
 
 - Update tests.
 
-
 1.10 (2015-04-01)
 -----------------
 
 - Forms now notify the ObjectEditedEvent instead of the ObjectModifiedEvent.
-
 
 1.10a1 (2013-11-22)
 -------------------
