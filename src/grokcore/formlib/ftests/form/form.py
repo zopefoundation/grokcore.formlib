@@ -3,14 +3,14 @@ A grok.EditForm is a special grok.View that renders an edit form.
 
   >>> getRootFolder()["manfred"] = Mammoth()
 
-  >>> from zope.app.wsgi.testlayer import Browser
+  >>> from zope.testbrowser.wsgi import Browser
   >>> browser = Browser()
   >>> browser.handleErrors = False
   >>> browser.open("http://localhost/manfred/@@edit")
   >>> browser.getControl(name="form.name").value = "Manfred the Mammoth"
   >>> browser.getControl(name="form.size").value = "Really big"
   >>> browser.getControl("Apply").click()
-  >>> print browser.contents
+  >>> print(browser.contents)
   <html>...
   ...Manfred the Mammoth...
   ...Really big...
@@ -19,7 +19,7 @@ A grok.EditForm is a special grok.View that renders an edit form.
 grok.DisplayForm renders a display form:
 
   >>> browser.open("http://localhost/manfred/@@display")
-  >>> print browser.contents
+  >>> print(browser.contents)
   <html>...
   ...Manfred the Mammoth...
   ...Really big...
@@ -37,15 +37,16 @@ over POST requests::
   ...    "form.name=Manfred&form.size=Big&form.actions.apply=Apply")
   Traceback (most recent call last):
   ...
-  MethodNotAllowed: <grokcore.formlib.ftests.form.form.Mammoth object at ...>,
-  <zope.publisher.browser.BrowserRequest
-  instance URL=http://localhost/manfred/@@editprotected>
+  zope.publisher.interfaces.http.MethodNotAllowed: \
+  <grokcore.formlib.ftests.form.form.Mammoth object at ...>, \
+  <zope.publisher.browser.BrowserRequest instance \
+  URL=http://localhost/manfred/@@editprotected>
 
 When CSRF protection is enabled, the corresponding hidden form field is
 rendered by the form templates::
 
   >>> browser.open("http://localhost/manfred/@@editcsrfprotected")
-  >>> print browser.contents
+  >>> print(browser.contents)
   <html>...
   <input type="hidden" name="__csrftoken__" value="..." />...
 
@@ -62,20 +63,20 @@ InvalidForm error::
   >>> browser.getControl("Apply").click()
   Traceback (most recent call last):
   ...
-  InvalidCSRFTokenError: Invalid CSRF token
+  zope.formlib.interfaces.InvalidCSRFTokenError: Invalid CSRF token
 
 """
 import grokcore.formlib as grok
 from zope import schema
-from zope.interface import Interface, implements
+from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
+@implementer(IMammoth)
 class Mammoth(grok.testing.Model):
-    implements(IMammoth)
     grok.testing.protect_get(grok.Public, 'name', 'size')
     grok.testing.protect_set(grok.Public, 'name', 'size')
 

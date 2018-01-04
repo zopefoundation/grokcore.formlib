@@ -6,14 +6,14 @@ manually by calling self.applyData(object, data).
 
   >>> getRootFolder()["manfred"] = Mammoth()
 
-  >>> from zope.app.wsgi.testlayer import Browser
+  >>> from zope.testbrowser.wsgi import Browser
   >>> browser = Browser()
   >>> browser.handleErrors = False
   >>> browser.open("http://localhost/manfred/@@edit")
   >>> browser.getControl(name="form.name").value = "Manfred the Mammoth"
   >>> browser.getControl(name="form.size").value = "Really big"
   >>> browser.getControl("Apply").click()
-  >>> print browser.contents
+  >>> print(browser.contents)
   <html>...
   ...Modified!...
   ...Manfred the Mammoth...
@@ -23,7 +23,7 @@ manually by calling self.applyData(object, data).
 Save again without any changes:
 
   >>> browser.getControl("Apply").click()
-  >>> print browser.contents
+  >>> print(browser.contents)
   <html>...
   ...No changes!...
   ...
@@ -31,7 +31,7 @@ Save again without any changes:
   >>> browser.open("http://localhost/manfred/@@edit")
   >>> browser.getControl(name="form.name").value = "Manfred the Second"
   >>> browser.getControl("Hairy").click()
-  >>> print browser.contents
+  >>> print(browser.contents)
   <html>...
   ...Manfred the Second...
   ...Really big and hairy...
@@ -40,7 +40,7 @@ Save again without any changes:
   >>> browser.open("http://localhost/manfred/meet")
   >>> browser.getControl(name="form.other").value = "Ellie"
   >>> browser.getControl("Meet").click()
-  >>> print browser.contents
+  >>> print(browser.contents)
   Manfred the Second meets Ellie
 
 There used to be a bug (or rather an inconvenience) where when no actions were
@@ -53,15 +53,15 @@ following view does not raise an AttributeError anymore::
 """
 import grokcore.formlib as grok
 from zope import schema
-from zope.interface import Interface, implements
+from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
+@implementer(IMammoth)
 class Mammoth(grok.testing.Model):
-    implements(IMammoth)
     grok.testing.protect_get(grok.Public, 'name', 'size')
     grok.testing.protect_set(grok.Public, 'name', 'size')
 

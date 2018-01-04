@@ -1,13 +1,22 @@
 import doctest
+import grokcore.formlib
 import re
 import unittest
+import zope.app.wsgi.testlayer
+import zope.testbrowser.wsgi
+
 from pkg_resources import resource_listdir
-
 from zope.testing import renormalizing
-from zope.app.wsgi.testlayer import BrowserLayer
-import grokcore.formlib
 
-FunctionalLayer = BrowserLayer(grokcore.formlib)
+
+class Layer(
+        zope.testbrowser.wsgi.TestBrowserLayer,
+        zope.app.wsgi.testlayer.BrowserLayer):
+    pass
+
+
+layer = Layer(grokcore.formlib)
+
 
 checker = renormalizing.RENormalizing([
     # Accommodate to exception wrapping in newer versions of mechanize
@@ -23,18 +32,17 @@ def suiteFromPackage(name):
             continue
         if filename == '__init__.py':
             continue
-
         dottedname = 'grokcore.formlib.ftests.%s.%s' % (name, filename[:-3])
         test = doctest.DocTestSuite(
             dottedname,
             checker=checker,
-            extraglobs=dict(getRootFolder=FunctionalLayer.getRootFolder),
-            optionflags=(doctest.ELLIPSIS +
-                         doctest.NORMALIZE_WHITESPACE +
-                         doctest.REPORT_NDIFF)
-            )
-        test.layer = FunctionalLayer
-
+            extraglobs=dict(getRootFolder=layer.getRootFolder),
+            optionflags=(
+                doctest.ELLIPSIS +
+                doctest.NORMALIZE_WHITESPACE +
+                doctest.REPORT_NDIFF +
+                renormalizing.IGNORE_EXCEPTION_MODULE_IN_PYTHON2))
+        test.layer = layer
         suite.addTest(test)
     return suite
 

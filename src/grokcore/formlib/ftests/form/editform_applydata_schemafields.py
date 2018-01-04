@@ -11,7 +11,7 @@ model class:
   >>> mammoth.name = 'Manfred the Mammoth'
   >>> mammoth.size = 'Really big'
 
-  >>> from zope.app.wsgi.testlayer import Browser
+  >>> from zope.testbrowser.wsgi import Browser
   >>> browser = Browser()
   >>> browser.handleErrors = False
 
@@ -55,24 +55,24 @@ And finally let's change both fields:
 """
 import grokcore.formlib as grok
 from zope import schema
-from zope.interface import Interface, implements
+from zope.interface import Interface, implementer
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
+@implementer(IMammoth)
 class Mammoth(grok.testing.Model):
-    implements(IMammoth)
     grok.testing.protect_get(grok.Public, 'name', 'size')
     grok.testing.protect_set(grok.Public, 'name', 'size')
-    
+
 class Edit(grok.EditForm):
     pass
 
 @grok.subscribe(Mammoth, IObjectModifiedEvent)
 def notify_change_event(mammoth, event):
-    print ("An IObjectModifiedEvent was sent for a mammoth with the "
-           "following changes:")
+    print("An IObjectModifiedEvent was sent for a mammoth with the "
+          "following changes:")
     for descr in event.descriptions:
-        print ", ".join(descr.attributes)
+        print(", ".join(descr.attributes))
