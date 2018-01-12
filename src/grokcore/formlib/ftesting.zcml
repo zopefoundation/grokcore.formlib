@@ -11,7 +11,7 @@
   <grok:grok package="grokcore.formlib.testing" />
 
   <include package="grokcore.formlib" />
-  <grok:grok package="grokcore.formlib.ftests" />
+  <grok:grok package="grokcore.formlib.tests.functional" />
 
   <browser:defaultView
       for="grokcore.component.interfaces.IContext"

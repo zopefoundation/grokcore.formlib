@@ -38,7 +38,7 @@ over POST requests::
   Traceback (most recent call last):
   ...
   zope.publisher.interfaces.http.MethodNotAllowed: \
-  <grokcore.formlib.ftests.form.form.Mammoth object at ...>, \
+  <grokcore.formlib.tests.functional.form.form.Mammoth object at ...>, \
   <zope.publisher.browser.BrowserRequest instance \
   URL=http://localhost/manfred/@@editprotected>
 
