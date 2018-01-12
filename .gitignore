@@ -8,5 +8,8 @@ bin
 dev
 develop-eggs
 htmlcov/
+lib/
 parts
+pip-selfcheck.json
+pyvenv.cfg
 src/*.egg-info
