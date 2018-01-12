@@ -25,9 +25,9 @@ checker = renormalizing.RENormalizing([
 
 
 def suiteFromPackage(name):
-    suite = unittest.TestSuite()
     layer_dir = 'functional'
     files = resource_listdir(__name__, '{}/{}'.format(layer_dir, name))
+    suite = unittest.TestSuite()
     for filename in files:
         if not filename.endswith('.py'):
             continue
