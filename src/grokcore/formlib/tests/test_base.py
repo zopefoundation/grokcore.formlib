@@ -25,7 +25,8 @@ checker = renormalizing.RENormalizing([
 
 
 def suiteFromPackage(name):
-    files = resource_listdir(__name__, name)
+    layer_dir = 'base'
+    files = resource_listdir(__name__, '{}/{}'.format(layer_dir, name))
     suite = unittest.TestSuite()
     for filename in files:
         if not filename.endswith('.py'):
@@ -34,7 +35,8 @@ def suiteFromPackage(name):
             continue
         if filename == '__init__.py':
             continue
-        dottedname = 'grokcore.formlib.tests.%s.%s' % (name, filename[:-3])
+        dottedname = 'grokcore.formlib.tests.%s.%s.%s' % (
+            layer_dir, name, filename[:-3])
         test = doctest.DocTestSuite(
             dottedname,
             setUp=setUpZope,

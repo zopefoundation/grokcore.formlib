@@ -6,7 +6,7 @@ EditForm has an explicit template associate with it.
   Traceback (most recent call last):
   ...
   martian.error.GrokError: It is not allowed to specify a custom 'render' \
-  method for form <class 'grokcore.formlib.tests.form.norender.Edit'>. \
+  method for form <class 'grokcore.formlib.tests.base.form.norender.Edit'>. \
   Forms either use the default template or a custom-supplied one.
 
 """
