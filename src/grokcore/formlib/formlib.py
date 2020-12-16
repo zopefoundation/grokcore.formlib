@@ -89,6 +89,7 @@ def get_auto_fields(context):
     fields = fields.omit('__name__')
     return fields
 
+
 AutoFields = get_auto_fields
 
 

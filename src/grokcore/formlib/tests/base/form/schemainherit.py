@@ -35,33 +35,41 @@ import grokcore.formlib as grok
 from zope import schema
 from zope.interface import Interface, implementer
 
+
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
+
 class ISpecialMammoth(IMammoth):
     speciality = schema.TextLine(title=u"Speciality")
+
 
 @implementer(ISpecialMammoth)
 class Mammoth(grok.Context):
     pass
 
+
 class Edit(grok.EditForm):
     grok.context(Mammoth)
+
 
 class Edit2(grok.EditForm):
     grok.context(Mammoth)
 
     form_fields = grok.AutoFields(Mammoth)
 
+
 # situation where subclass implements something on top of base class
 @implementer(IMammoth)
 class AnotherMammoth(grok.Context):
     pass
 
+
 @implementer(ISpecialMammoth)
 class YetAnotherMammoth(AnotherMammoth):
     pass
+
 
 class Edit3(grok.EditForm):
     grok.context(YetAnotherMammoth)

@@ -56,9 +56,11 @@ from zope import schema
 from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 
+
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
+
 
 @implementer(IMammoth)
 class Mammoth(grok.testing.Model):
@@ -67,6 +69,7 @@ class Mammoth(grok.testing.Model):
 
     name = FieldProperty(IMammoth['name'])
     size = FieldProperty(IMammoth['size'])
+
 
 class Edit(grok.EditForm):
 
@@ -82,15 +85,16 @@ class Edit(grok.EditForm):
         self.applyData(self.context, **data)
         self.context.size += " and hairy"
 
+
 class Meet(grok.Form):
     form_fields = grok.Fields(
-        other = schema.TextLine(title=u'Mammoth to meet with')
-        )
+        other=schema.TextLine(title=u'Mammoth to meet with'))
 
     @grok.action('Meet')
     def meet(self, other):
         return self.context.name + ' meets ' + other
 
+
 class Greet(grok.Form):
     form_fields = grok.Fields(
-        other = schema.TextLine(title=u'Mammoth to say hi to'))
+        other=schema.TextLine(title=u'Mammoth to say hi to'))

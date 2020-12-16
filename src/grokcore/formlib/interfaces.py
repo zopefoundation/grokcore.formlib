@@ -18,6 +18,7 @@ from zope.schema import ASCII
 from zope.formlib.interfaces import reConstraint
 from grokcore.view.interfaces import IGrokView
 
+
 class IGrokForm(IGrokView):
     """Grok form API, inspired by zope.formlib's IFormBaseCustomization.
 
@@ -37,11 +38,10 @@ class IGrokForm(IGrokView):
         followed by a dot.
         """,
         readonly=True,
-        )
+    )
 
     def setPrefix(prefix):
-        """Update the subpage prefix
-        """
+        """Update the subpage prefix."""
 
     label = Attribute("A label to display at the top of a form")
 
@@ -110,6 +110,7 @@ class IGrokForm(IGrokView):
         the method works in update mode (e.g. on EditForms) and
         doesn't have to update an object, the dictionary is empty.
         """
+
 
 class IBaseClasses(Interface):
     Form = Attribute("Base class for forms.")

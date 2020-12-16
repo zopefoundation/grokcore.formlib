@@ -21,13 +21,16 @@ import grokcore.formlib as grok
 from zope import schema
 from zope.interface import Interface, implementer
 
+
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
+
 @implementer(IMammoth)
 class Mammoth(grok.Context):
     pass
+
 
 class Edit(grok.EditForm):
     grok.context(Mammoth)

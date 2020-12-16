@@ -36,25 +36,31 @@ import grokcore.formlib as grok
 from zope import schema
 from zope.interface import Interface, implementer
 
+
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
+
 
 @implementer(IMammoth)
 class Mammoth(grok.Context):
     pass
 
+
 class Edit(grok.EditForm):
     grok.context(Mammoth)
+
 
 class IDifferentMammoth(Interface):
     # mind the different order of fields
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
     name = schema.TextLine(title=u"Name")
 
+
 @implementer(IDifferentMammoth)
 class DifferentMammoth(grok.Context):
     pass
+
 
 class EditDifferent(grok.EditForm):
     grok.context(DifferentMammoth)

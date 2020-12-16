@@ -13,8 +13,10 @@ EditForm has no explicit template associated with it:
 
 import grokcore.formlib as grok
 
+
 class Mammoth(grok.Context):
     pass
+
 
 class Edit(grok.EditForm):
     # not allowed to have a render method

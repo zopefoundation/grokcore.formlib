@@ -34,23 +34,29 @@ from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 from zope.container.btree import BTreeContainer
 from zope.container.interfaces import IContainer
 
+
 class Zoo(grok.testing.Model, BTreeContainer):
     grok.testing.protect_get(grok.Public, *IContainer)
+
 
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size")
+
 
 @implementer(IMammoth)
 class Mammoth(grok.testing.Model):
     grok.testing.protect_get(grok.Public, 'name', 'size')
     grok.testing.protect_set(grok.Public, 'name', 'size')
 
+
 class Index(grok.View):
     grok.context(Mammoth)
+
     def render(self):
         return 'Hi, my name is %s, and I\'m "%s"' % (self.context.name,
                                                      self.context.size)
+
 
 class AddMammoth(grok.AddForm):
     grok.context(Zoo)
@@ -63,6 +69,7 @@ class AddMammoth(grok.AddForm):
         if self.applyData(ellie, **data):
             return 'There were changes according to applyData.'
         return 'There were no changes according to applyData.'
+
 
 @grok.subscribe(Mammoth, IObjectModifiedEvent)
 def notify_change_event(mammoth, event):

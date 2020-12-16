@@ -32,19 +32,24 @@ class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
+
 @implementer(IMammoth)
 class Mammoth(grok.Context):
     pass
+
 
 class Edit(grok.EditForm):
     grok.context(Mammoth)
 
     form_fields = grok.AutoFields(Mammoth).omit('size')
 
+
 class Mammoth2(grok.Context):
+
     class fields:
         name = schema.TextLine(title=u"Name")
         size = schema.TextLine(title=u"Size", default=u"Quite normal")
+
 
 class Edit2(grok.EditForm):
     grok.context(Mammoth2)

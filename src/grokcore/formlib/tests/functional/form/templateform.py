@@ -46,6 +46,7 @@ Custom display template with an explicit template:
 import grokcore.formlib as grok
 from zope import schema
 
+
 class Mammoth(grok.testing.Model):
     grok.testing.protect_get(grok.Public, 'name', 'size')
     grok.testing.protect_set(grok.Public, 'name', 'size')
@@ -54,24 +55,32 @@ class Mammoth(grok.testing.Model):
         name = schema.TextLine(title=u"Name")
         size = schema.TextLine(title=u"Size", default=u"Quite normal")
 
+
 class Edit(grok.EditForm):
     pass
+
 
 class Edit2(grok.EditForm):
     pass
 
+
 edit2 = grok.PageTemplate('<p>Test edit</p>')
+
 
 class Edit3(grok.EditForm):
     grok.template('edit2')
 
+
 class Display(grok.DisplayForm):
     pass
+
 
 class Display2(grok.DisplayForm):
     pass
 
+
 display2 = grok.PageTemplate('<p>Test display</p>')
+
 
 class Display3(grok.DisplayForm):
     grok.template('display2')
