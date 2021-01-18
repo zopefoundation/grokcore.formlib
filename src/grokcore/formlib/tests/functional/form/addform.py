@@ -32,8 +32,10 @@ from zope.container.btree import BTreeContainer
 from zope.container.contained import Contained
 from zope.container.interfaces import IContainer
 
+
 class Zoo(grok.testing.Model, BTreeContainer):
     grok.testing.protect_get(grok.Public, *IContainer)
+
 
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
@@ -49,12 +51,14 @@ class Mammoth(Contained, grok.testing.Model):
         self.name = name
         self.size = size
 
+
 class Index(grok.View):
     grok.context(Mammoth)
 
     def render(self):
         return 'Hi, my name is %s, and I\'m "%s"' % (self.context.name,
                                                      self.context.size)
+
 
 class AddMammoth(grok.AddForm):
     grok.context(Zoo)
@@ -66,6 +70,7 @@ class AddMammoth(grok.AddForm):
         # pass data into Mammoth constructor
         self.context['manfred'] = manfred = Mammoth(**data)
         self.redirect(self.url(manfred))
+
 
 class AddMammothApplyData(AddMammoth):
 

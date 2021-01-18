@@ -29,6 +29,7 @@ from grokcore.component import Context
 # We may hope that something like this eventually makes it into
 # grokcore.security.
 
+
 class Model(Context):
     pass
 
@@ -53,8 +54,10 @@ class protect_get(grokcore.security.require):
     def __call__(self, *args, **kw):
         raise NotImplementedError
 
+
 class protect_set(protect_get):
     pass
+
 
 class ModelSecurityGrokker(martian.ClassGrokker):
     martian.component(Model)
@@ -85,13 +88,13 @@ class ModelSecurityGrokker(martian.ClassGrokker):
                 discriminator=('protectName', factory, name),
                 callable=protect_getattr,
                 args=(factory, name, permission),
-                )
+            )
         for name, permission in set_names.items():
             config.action(
                 discriminator=('protectSetAttribute', factory, name),
                 callable=protect_setattr,
                 args=(factory, name, permission),
-                )
+            )
         return True
 
 

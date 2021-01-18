@@ -17,13 +17,14 @@ should be available in the definition order.
 import grokcore.formlib as grok
 from zope import schema
 
+
 class Mammoth(grok.Context):
     pass
 
+
 class Edit(grok.EditForm):
     form_fields = grok.Fields(
-        a = schema.TextLine(title=u"Alpha"),
-        b = schema.TextLine(title=u"Beta"),
-        g = schema.TextLine(title=u"Gamma"),
-        d = schema.TextLine(title=u"Delta"))
-    
+        a=schema.TextLine(title=u"Alpha"),
+        b=schema.TextLine(title=u"Beta"),
+        g=schema.TextLine(title=u"Gamma"),
+        d=schema.TextLine(title=u"Delta"))

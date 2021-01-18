@@ -55,6 +55,7 @@ import grokcore.formlib as grok
 from zope import schema
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
+
 class Mammoth(grok.testing.Model):
     grok.testing.protect_get(grok.Public, 'name', 'size')
     grok.testing.protect_set(grok.Public, 'name', 'size')
@@ -65,6 +66,7 @@ class Mammoth(grok.testing.Model):
 
     def getName(self):
         return self._name
+
     def setName(self, value):
         print("The 'name' property is being set.")
         self._name = value
@@ -72,17 +74,20 @@ class Mammoth(grok.testing.Model):
 
     def getSize(self):
         return self._size
+
     def setSize(self, value):
         print("The 'size' property is being set.")
         self._size = value
     size = property(getSize, setSize)
 
+
 class Edit(grok.EditForm):
 
     form_fields = grok.Fields(
-        name = schema.TextLine(title=u"Name"),
-        size = schema.TextLine(title=u"Size")
-        )
+        name=schema.TextLine(title=u"Name"),
+        size=schema.TextLine(title=u"Size")
+    )
+
 
 @grok.subscribe(Mammoth, IObjectModifiedEvent)
 def notify_change_event(mammoth, event):

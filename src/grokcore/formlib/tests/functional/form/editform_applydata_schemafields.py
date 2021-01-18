@@ -58,17 +58,21 @@ from zope import schema
 from zope.interface import Interface, implementer
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
+
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
+
 
 @implementer(IMammoth)
 class Mammoth(grok.testing.Model):
     grok.testing.protect_get(grok.Public, 'name', 'size')
     grok.testing.protect_set(grok.Public, 'name', 'size')
 
+
 class Edit(grok.EditForm):
     pass
+
 
 @grok.subscribe(Mammoth, IObjectModifiedEvent)
 def notify_change_event(mammoth, event):

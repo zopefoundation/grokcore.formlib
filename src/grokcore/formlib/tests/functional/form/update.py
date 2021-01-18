@@ -40,14 +40,16 @@ be filled with values from the request (such as form values):
   >>> print(browser.contents)
   Mallie, the Mammoth reports: Request argument dispatch to update() works.
 
-"""
+"""  # noqa: E501 line too long
 import grokcore.formlib as grok
 from zope import schema
 
 from zope.interface import Interface, implementer
 
+
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
+
 
 @implementer(IMammoth)
 class Mammoth(grok.testing.Model):
@@ -56,17 +58,20 @@ class Mammoth(grok.testing.Model):
 
     name = u'Manfred'
 
+
 class Index(grok.View):
 
     def render(self):
         return "%s, the Mammoth reports: %s" % (self.context.name,
                                                 self.context.report)
 
+
 class Edit(grok.EditForm):
 
     def update(self):
         self.context.report = ("The form's update() was called and my name "
                                "was %s." % self.context.name)
+
 
 class EditRedirect(grok.EditForm):
 
@@ -75,19 +80,23 @@ class EditRedirect(grok.EditForm):
         if 'form.name' in self.request:
             self.redirect(self.url('index'))
 
+
 class EditUpdateWithArguments(grok.EditForm):
 
     def update(self, report=None):
         if report is not None:
             self.context.report = report
 
+
 editupdatewitharguments = grok.PageTemplate("""
 <html>
 <body>
 <form action="" tal:attributes="action request/URL">
   <input type="text" name="report" />
-  <div tal:repeat="widget view/widgets" tal:content="structure widget" />
-  <div tal:repeat="action view/actions" tal:content="structure action/render" />
+  <div tal:repeat="widget view/widgets"
+       tal:content="structure widget" />
+  <div tal:repeat="action view/actions"
+       tal:content="structure action/render" />
 </form>
 </body>
 </html>

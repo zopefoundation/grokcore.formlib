@@ -13,12 +13,15 @@ EditForm has an explicit template associate with it.
 
 import grokcore.formlib as grok
 
+
 class Mammoth(grok.Context):
     pass
+
 
 class Edit(grok.EditForm):
     # not allowed to have a render method
     def render(self):
         return "this cannot be"
+
 
 edit = grok.PageTemplate('Foo!')

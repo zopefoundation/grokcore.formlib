@@ -71,9 +71,11 @@ from zope import schema
 from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 
+
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
+
 
 @implementer(IMammoth)
 class Mammoth(grok.testing.Model):
@@ -83,14 +85,18 @@ class Mammoth(grok.testing.Model):
     name = FieldProperty(IMammoth['name'])
     size = FieldProperty(IMammoth['size'])
 
+
 class Edit(grok.EditForm):
     pass
+
 
 class Display(grok.DisplayForm):
     pass
 
+
 class EditProtected(grok.EditForm):
     method = 'POST'  # only allow submits over POST requests.
+
 
 class EditCsrfProtected(EditProtected):
     protected = True  # enables CSRF protection.

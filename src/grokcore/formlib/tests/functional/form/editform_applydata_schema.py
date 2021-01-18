@@ -59,9 +59,11 @@ from zope import schema
 from zope.interface import Interface, implementer
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
+
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size")
+
 
 @implementer(IMammoth)
 class Mammoth(grok.testing.Model):
@@ -74,6 +76,7 @@ class Mammoth(grok.testing.Model):
 
     def getName(self):
         return self._name
+
     def setName(self, value):
         print("The 'name' property is being set.")
         self._name = value
@@ -81,13 +84,16 @@ class Mammoth(grok.testing.Model):
 
     def getSize(self):
         return self._size
+
     def setSize(self, value):
         print("The 'size' property is being set.")
         self._size = value
     size = property(getSize, setSize)
 
+
 class Edit(grok.EditForm):
     form_fields = grok.AutoFields(IMammoth)
+
 
 @grok.subscribe(Mammoth, IObjectModifiedEvent)
 def notify_change_event(mammoth, event):

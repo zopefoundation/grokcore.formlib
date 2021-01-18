@@ -43,9 +43,11 @@ from zope import schema
 from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 
+
 class IMammoth(Interface):
     name = schema.TextLine(title=u"Name")
     size = schema.TextLine(title=u"Size", default=u"Quite normal")
+
 
 @implementer(IMammoth)
 class Mammoth(grok.Context):
@@ -53,26 +55,33 @@ class Mammoth(grok.Context):
     name = FieldProperty(IMammoth['name'])
     size = FieldProperty(IMammoth['size'])
 
+
 class Edit(grok.EditForm):
     grok.context(Mammoth)
 
+
 class IMovieCharacter(Interface):
     can_talk = schema.Bool(title=u'Can talk', default=False)
+
 
 @implementer(IMovieCharacter)
 class Manfred(Mammoth):
     pass
 
+
 class Edit2(grok.EditForm):
     grok.context(Manfred)
+
 
 class IYetAnotherMammoth(Interface):
     alpha = schema.TextLine(title=u'alpha')
     beta = schema.TextLine(title=u'beta')
 
+
 @implementer(IYetAnotherMammoth)
 class YetAnotherMammoth(grok.Context):
     pass
+
 
 class Edit4(grok.EditForm):
     grok.context(IYetAnotherMammoth)
