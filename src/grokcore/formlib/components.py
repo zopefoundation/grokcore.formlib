@@ -148,7 +148,7 @@ class EditForm(GrokForm, form.EditFormBase, View):
 
             self.status = "Updated on %s" % formatter.format(
                 datetime.datetime.now(time_zone)
-                )
+            )
         else:
             self.status = 'No changes'
 

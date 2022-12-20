@@ -28,6 +28,7 @@ from grokcore.content import ObjectEditedEvent
 class action(zope.formlib.form.action):
     """We override the action decorator we pass in our custom Action.
     """
+
     def __call__(self, success):
         action = Action(self.label, success=success, **self.options)
         self.actions.append(action)

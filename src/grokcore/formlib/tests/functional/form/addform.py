@@ -59,7 +59,7 @@ class Index(grok.View):
 
     def render(self):
         return 'Hi, my name is {}, and I\'m "{}"'.format(self.context.name,
-                                                     self.context.size)
+                                                         self.context.size)
 
 
 class AddMammoth(grok.AddForm):

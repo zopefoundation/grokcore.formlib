@@ -64,7 +64,7 @@ class Index(grok.View):
 
     def render(self):
         return "{}, the Mammoth reports: {}".format(self.context.name,
-                                                self.context.report)
+                                                    self.context.report)
 
 
 class Edit(grok.EditForm):
