@@ -39,12 +39,12 @@ import grokcore.formlib as grok
 
 
 class IMammoth(Interface):
-    name = schema.TextLine(title=u"Name")
-    size = schema.TextLine(title=u"Size", default=u"Quite normal")
+    name = schema.TextLine(title="Name")
+    size = schema.TextLine(title="Size", default="Quite normal")
 
 
 class ISpecialMammoth(IMammoth):
-    speciality = schema.TextLine(title=u"Speciality")
+    speciality = schema.TextLine(title="Speciality")
 
 
 @implementer(ISpecialMammoth)

@@ -49,7 +49,7 @@ import grokcore.formlib as grok
 
 
 class IMammoth(Interface):
-    name = schema.TextLine(title=u"Name")
+    name = schema.TextLine(title="Name")
 
 
 @implementer(IMammoth)
@@ -57,13 +57,13 @@ class Mammoth(grok.testing.Model):
     grok.testing.protect_get(grok.Public, 'name', 'report')
     grok.testing.protect_set(grok.Public, 'name', 'report')
 
-    name = u'Manfred'
+    name = 'Manfred'
 
 
 class Index(grok.View):
 
     def render(self):
-        return "%s, the Mammoth reports: %s" % (self.context.name,
+        return "{}, the Mammoth reports: {}".format(self.context.name,
                                                 self.context.report)
 
 

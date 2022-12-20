@@ -37,7 +37,7 @@ default_display_template = PageTemplateFile(os.path.join(
 default_display_template.__grok_name__ = 'default_display_form'
 
 
-class GrokForm(object):
+class GrokForm:
     """Mix-in to consolidate zope.formlib's forms with grok.View and to
     add some more useful methods.
 
@@ -60,7 +60,7 @@ class GrokForm(object):
         On zope.formlib forms, this is what the update() method is.
         In grok views, the update() method has a different meaning.
         That's why this method is called update_form() in grok forms."""
-        super(GrokForm, self).update()
+        super().update()
 
     def render(self):
         """Render the form, either using the form template or whatever

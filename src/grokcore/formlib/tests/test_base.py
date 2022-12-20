@@ -17,7 +17,7 @@ def cleanUpZope(test):
 
 def suiteFromPackage(name):
     layer_dir = 'base'
-    files = resource_listdir(__name__, '{}/{}'.format(layer_dir, name))
+    files = resource_listdir(__name__, f'{layer_dir}/{name}')
     suite = unittest.TestSuite()
     for filename in files:
         if not filename.endswith('.py'):
@@ -26,7 +26,7 @@ def suiteFromPackage(name):
             continue
         if filename == '__init__.py':
             continue
-        dottedname = 'grokcore.formlib.tests.%s.%s.%s' % (
+        dottedname = 'grokcore.formlib.tests.{}.{}.{}'.format(
             layer_dir, name, filename[:-3])
         test = doctest.DocTestSuite(
             dottedname,

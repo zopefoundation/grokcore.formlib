@@ -47,8 +47,8 @@ import grokcore.formlib as grok
 
 
 class IMammoth(Interface):
-    name = schema.TextLine(title=u"Name")
-    size = schema.TextLine(title=u"Size", default=u"Quite normal")
+    name = schema.TextLine(title="Name")
+    size = schema.TextLine(title="Size", default="Quite normal")
 
 
 @implementer(IMammoth)
@@ -63,7 +63,7 @@ class Edit(grok.EditForm):
 
 
 class IMovieCharacter(Interface):
-    can_talk = schema.Bool(title=u'Can talk', default=False)
+    can_talk = schema.Bool(title='Can talk', default=False)
 
 
 @implementer(IMovieCharacter)
@@ -76,8 +76,8 @@ class Edit2(grok.EditForm):
 
 
 class IYetAnotherMammoth(Interface):
-    alpha = schema.TextLine(title=u'alpha')
-    beta = schema.TextLine(title=u'beta')
+    alpha = schema.TextLine(title='alpha')
+    beta = schema.TextLine(title='beta')
 
 
 @implementer(IYetAnotherMammoth)

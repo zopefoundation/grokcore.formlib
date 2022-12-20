@@ -33,7 +33,7 @@ class IGrokForm(IGrokView):
         constraint=reConstraint(
             '[a-zA-Z][a-zA-Z0-9_]*([.][a-zA-Z][a-zA-Z0-9_]*)*',
             "Must be a sequence of not-separated identifiers"),
-        description=u"""Page-element prefix
+        description="""Page-element prefix
 
         All named or identified page elements in a subpage should have
         names and identifiers that begin with a subpage prefix

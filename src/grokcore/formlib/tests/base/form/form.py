@@ -40,8 +40,8 @@ import grokcore.formlib as grok
 
 
 class IMammoth(Interface):
-    name = schema.TextLine(title=u"Name")
-    size = schema.TextLine(title=u"Size", default=u"Quite normal")
+    name = schema.TextLine(title="Name")
+    size = schema.TextLine(title="Size", default="Quite normal")
 
 
 @implementer(IMammoth)
@@ -55,8 +55,8 @@ class Edit(grok.EditForm):
 
 class IDifferentMammoth(Interface):
     # mind the different order of fields
-    size = schema.TextLine(title=u"Size", default=u"Quite normal")
-    name = schema.TextLine(title=u"Name")
+    size = schema.TextLine(title="Size", default="Quite normal")
+    name = schema.TextLine(title="Name")
 
 
 @implementer(IDifferentMammoth)

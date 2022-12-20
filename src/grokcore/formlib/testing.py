@@ -40,14 +40,14 @@ class protect_get(grokcore.security.require):
     default = []
 
     def validate(self, permission, *attrs):
-        super(protect_get, self).validate(permission)
+        super().validate(permission)
         for name in attrs:
             # TODO We should probably check whether 'name' is a valid
             # Python identifier
             martian.validateText(self, name)
 
     def factory(self, permission, *attrs):
-        permission = super(protect_get, self).factory(permission)
+        permission = super().factory(permission)
         return (permission, attrs)
 
     # Override baseclass's __call__.  This directive can't be used as
