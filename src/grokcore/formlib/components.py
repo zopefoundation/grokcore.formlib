@@ -13,20 +13,21 @@
 ##############################################################################
 """Formlib-based components"""
 
-import os
 import datetime
+import os
 import warnings
-import pytz
 
+import pytz
+from zope.formlib import form
 from zope.interface import implementer_only
 from zope.interface.common import idatetime
 from zope.publisher.publish import mapply
-from zope.formlib import form
 
-from grokcore.view import View
-from grokcore.view import PageTemplateFile
 from grokcore.formlib import formlib
 from grokcore.formlib.interfaces import IGrokForm
+from grokcore.view import PageTemplateFile
+from grokcore.view import View
+
 
 default_form_template = PageTemplateFile(os.path.join(
     'templates', 'default_edit_form.pt'))
@@ -147,7 +148,7 @@ class EditForm(GrokForm, form.EditFormBase, View):
 
             self.status = "Updated on %s" % formatter.format(
                 datetime.datetime.now(time_zone)
-                )
+            )
         else:
             self.status = 'No changes'
 

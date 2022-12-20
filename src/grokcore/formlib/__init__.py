@@ -13,17 +13,21 @@
 ##############################################################################
 """Grok
 """
-from grokcore.component import *
-from grokcore.security import *
-from grokcore.view import *
-
-from grokcore.formlib.components import Form, AddForm, EditForm, DisplayForm
-from grokcore.formlib.formlib import action, AutoFields, Fields
-
 # Import this module so that it's available as soon as you import the
 # 'grokcore.formlib' package.  Useful for tests and interpreter examples.
 import grokcore.formlib.testing
-
+from grokcore.component import *
+from grokcore.formlib.components import AddForm
+from grokcore.formlib.components import DisplayForm
+from grokcore.formlib.components import EditForm
+from grokcore.formlib.components import Form
+from grokcore.formlib.formlib import AutoFields
+from grokcore.formlib.formlib import Fields
+from grokcore.formlib.formlib import action
 # Our __init__ provides the grok API directly so using 'import grok' is enough.
 from grokcore.formlib.interfaces import IGrokcoreFormlibAPI
+from grokcore.security import *
+from grokcore.view import *
+
+
 __all__ = list(IGrokcoreFormlibAPI)

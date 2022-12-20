@@ -38,10 +38,12 @@ will be retrieved from that interface, and that interface only:
   ['alpha', 'beta']
 
 """
-import grokcore.formlib as grok
 from zope import schema
-from zope.interface import Interface, implementer
+from zope.interface import Interface
+from zope.interface import implementer
 from zope.schema.fieldproperty import FieldProperty
+
+import grokcore.formlib as grok
 
 
 class IMammoth(Interface):

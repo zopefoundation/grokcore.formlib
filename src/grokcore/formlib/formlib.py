@@ -14,19 +14,21 @@
 """Custom implementations of formlib helpers
 """
 
-from zope.interface.interfaces import IInterface
-from zope.formlib.interfaces import IInputWidget
-from zope.schema.interfaces import IField
-from grokcore.content import ObjectEditedEvent
 import zope.event
 import zope.formlib.form
 import zope.interface
 import zope.lifecycleevent
+from zope.formlib.interfaces import IInputWidget
+from zope.interface.interfaces import IInterface
+from zope.schema.interfaces import IField
+
+from grokcore.content import ObjectEditedEvent
 
 
 class action(zope.formlib.form.action):
     """We override the action decorator we pass in our custom Action.
     """
+
     def __call__(self, success):
         action = Action(self.label, success=success, **self.options)
         self.actions.append(action)

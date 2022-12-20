@@ -17,8 +17,8 @@ import martian
 from martian.error import GrokError
 
 import grokcore.component
-from grokcore.formlib import formlib
 from grokcore.formlib import components
+from grokcore.formlib import formlib
 
 
 class FormGrokker(martian.ClassGrokker):

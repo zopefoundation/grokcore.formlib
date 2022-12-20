@@ -18,10 +18,11 @@ from martian.error import GrokError
 from zope.configuration.config import ConfigurationMachine
 
 import grokcore.security
+from grokcore.component import Context
+from grokcore.component import zcml
 from grokcore.security.util import protect_getattr
 from grokcore.security.util import protect_setattr
-from grokcore.component import zcml
-from grokcore.component import Context
+
 
 # Below is a simple grokker + directives that allow you to protect
 # attributes of a class with Zope 3 security checkers.  This is needed

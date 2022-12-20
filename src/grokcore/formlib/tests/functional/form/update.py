@@ -41,10 +41,11 @@ be filled with values from the request (such as form values):
   Mallie, the Mammoth reports: Request argument dispatch to update() works.
 
 """  # noqa: E501 line too long
-import grokcore.formlib as grok
 from zope import schema
+from zope.interface import Interface
+from zope.interface import implementer
 
-from zope.interface import Interface, implementer
+import grokcore.formlib as grok
 
 
 class IMammoth(Interface):
@@ -63,7 +64,7 @@ class Index(grok.View):
 
     def render(self):
         return "{}, the Mammoth reports: {}".format(self.context.name,
-                                                self.context.report)
+                                                    self.context.report)
 
 
 class Edit(grok.EditForm):

@@ -43,8 +43,9 @@ Custom display template with an explicit template:
   <p>Test display</p>
 
 """
-import grokcore.formlib as grok
 from zope import schema
+
+import grokcore.formlib as grok
 
 
 class Mammoth(grok.testing.Model):

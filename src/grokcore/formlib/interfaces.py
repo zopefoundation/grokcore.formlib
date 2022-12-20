@@ -13,9 +13,11 @@
 ##############################################################################
 """Grok interfaces
 """
-from zope.interface import Interface, Attribute
-from zope.schema import ASCII
 from zope.formlib.interfaces import reConstraint
+from zope.interface import Attribute
+from zope.interface import Interface
+from zope.schema import ASCII
+
 from grokcore.view.interfaces import IGrokView
 
 
