@@ -29,8 +29,8 @@ from zope.interface import Interface, implementer
 
 
 class IMammoth(Interface):
-    name = schema.TextLine(title=u"Name")
-    size = schema.TextLine(title=u"Size", default=u"Quite normal")
+    name = schema.TextLine(title="Name")
+    size = schema.TextLine(title="Size", default="Quite normal")
 
 
 @implementer(IMammoth)
@@ -47,8 +47,8 @@ class Edit(grok.EditForm):
 class Mammoth2(grok.Context):
 
     class fields:
-        name = schema.TextLine(title=u"Name")
-        size = schema.TextLine(title=u"Size", default=u"Quite normal")
+        name = schema.TextLine(title="Name")
+        size = schema.TextLine(title="Size", default="Quite normal")
 
 
 class Edit2(grok.EditForm):

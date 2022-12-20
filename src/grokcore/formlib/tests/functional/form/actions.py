@@ -58,8 +58,8 @@ from zope.schema.fieldproperty import FieldProperty
 
 
 class IMammoth(Interface):
-    name = schema.TextLine(title=u"Name")
-    size = schema.TextLine(title=u"Size", default=u"Quite normal")
+    name = schema.TextLine(title="Name")
+    size = schema.TextLine(title="Size", default="Quite normal")
 
 
 @implementer(IMammoth)
@@ -88,7 +88,7 @@ class Edit(grok.EditForm):
 
 class Meet(grok.Form):
     form_fields = grok.Fields(
-        other=schema.TextLine(title=u'Mammoth to meet with'))
+        other=schema.TextLine(title='Mammoth to meet with'))
 
     @grok.action('Meet')
     def meet(self, other):
@@ -97,4 +97,4 @@ class Meet(grok.Form):
 
 class Greet(grok.Form):
     form_fields = grok.Fields(
-        other=schema.TextLine(title=u'Mammoth to say hi to'))
+        other=schema.TextLine(title='Mammoth to say hi to'))

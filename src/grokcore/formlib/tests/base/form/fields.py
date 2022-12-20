@@ -24,7 +24,7 @@ class Mammoth(grok.Context):
 
 class Edit(grok.EditForm):
     form_fields = grok.Fields(
-        a=schema.TextLine(title=u"Alpha"),
-        b=schema.TextLine(title=u"Beta"),
-        g=schema.TextLine(title=u"Gamma"),
-        d=schema.TextLine(title=u"Delta"))
+        a=schema.TextLine(title="Alpha"),
+        b=schema.TextLine(title="Beta"),
+        g=schema.TextLine(title="Gamma"),
+        d=schema.TextLine(title="Delta"))

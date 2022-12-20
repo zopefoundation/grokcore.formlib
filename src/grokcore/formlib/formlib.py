@@ -36,7 +36,7 @@ class action(zope.formlib.form.action):
 class Action(zope.formlib.form.Action):
 
     def validate(self, data):
-        errors = super(Action, self).validate(data)
+        errors = super().validate(data)
         if errors is None:
             errors = self.form.validate(self, data)
         errors.extend(ensure_required_fields_have_input(

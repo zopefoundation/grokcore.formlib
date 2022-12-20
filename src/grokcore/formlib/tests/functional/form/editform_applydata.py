@@ -84,8 +84,8 @@ class Mammoth(grok.testing.Model):
 class Edit(grok.EditForm):
 
     form_fields = grok.Fields(
-        name=schema.TextLine(title=u"Name"),
-        size=schema.TextLine(title=u"Size")
+        name=schema.TextLine(title="Name"),
+        size=schema.TextLine(title="Size")
     )
 
 

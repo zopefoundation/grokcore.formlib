@@ -40,8 +40,8 @@ class Zoo(grok.testing.Model, BTreeContainer):
 
 
 class IMammoth(Interface):
-    name = schema.TextLine(title=u"Name")
-    size = schema.TextLine(title=u"Size")
+    name = schema.TextLine(title="Name")
+    size = schema.TextLine(title="Size")
 
 
 @implementer(IMammoth)
@@ -54,7 +54,7 @@ class Index(grok.View):
     grok.context(Mammoth)
 
     def render(self):
-        return 'Hi, my name is %s, and I\'m "%s"' % (self.context.name,
+        return 'Hi, my name is {}, and I\'m "{}"'.format(self.context.name,
                                                      self.context.size)
 
 

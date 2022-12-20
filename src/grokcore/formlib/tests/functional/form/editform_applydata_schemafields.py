@@ -60,8 +60,8 @@ from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 
 
 class IMammoth(Interface):
-    name = schema.TextLine(title=u"Name")
-    size = schema.TextLine(title=u"Size", default=u"Quite normal")
+    name = schema.TextLine(title="Name")
+    size = schema.TextLine(title="Size", default="Quite normal")
 
 
 @implementer(IMammoth)
