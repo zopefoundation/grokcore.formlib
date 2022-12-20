@@ -25,12 +25,14 @@ also use the ``applyData`` method to store the data on the object.
   Hi, my name is Ellie the Mammoth, and I\'m "Really small"
 
 """
-import grokcore.formlib as grok
 from zope import schema
-from zope.interface import Interface, implementer
 from zope.container.btree import BTreeContainer
 from zope.container.contained import Contained
 from zope.container.interfaces import IContainer
+from zope.interface import Interface
+from zope.interface import implementer
+
+import grokcore.formlib as grok
 
 
 class Zoo(grok.testing.Model, BTreeContainer):

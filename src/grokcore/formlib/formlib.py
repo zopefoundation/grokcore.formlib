@@ -14,14 +14,15 @@
 """Custom implementations of formlib helpers
 """
 
-from zope.interface.interfaces import IInterface
-from zope.formlib.interfaces import IInputWidget
-from zope.schema.interfaces import IField
-from grokcore.content import ObjectEditedEvent
 import zope.event
 import zope.formlib.form
 import zope.interface
 import zope.lifecycleevent
+from zope.formlib.interfaces import IInputWidget
+from zope.interface.interfaces import IInterface
+from zope.schema.interfaces import IField
+
+from grokcore.content import ObjectEditedEvent
 
 
 class action(zope.formlib.form.action):

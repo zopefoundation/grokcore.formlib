@@ -14,8 +14,9 @@ should be available in the definition order.
   ['a', 'b', 'g', 'd']
 
 """
-import grokcore.formlib as grok
 from zope import schema
+
+import grokcore.formlib as grok
 
 
 class Mammoth(grok.Context):

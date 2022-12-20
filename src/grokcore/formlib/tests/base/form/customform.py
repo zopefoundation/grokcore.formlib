@@ -17,9 +17,11 @@ We only expect a single field to be present in the form, as we omitted 'size':
 
 """
 
-import grokcore.formlib as grok
 from zope import schema
-from zope.interface import Interface, implementer
+from zope.interface import Interface
+from zope.interface import implementer
+
+import grokcore.formlib as grok
 
 
 class IMammoth(Interface):

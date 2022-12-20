@@ -51,9 +51,10 @@ And finally let's change both fields:
   True
 
 """
-import grokcore.formlib as grok
 from zope import schema
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
+
+import grokcore.formlib as grok
 
 
 class Mammoth(grok.testing.Model):

@@ -31,9 +31,11 @@ With AutoFields:
   >>> [w.__name__ for w in view.form_fields]
   ['name', 'size', 'speciality']
 """
-import grokcore.formlib as grok
 from zope import schema
-from zope.interface import Interface, implementer
+from zope.interface import Interface
+from zope.interface import implementer
+
+import grokcore.formlib as grok
 
 
 class IMammoth(Interface):

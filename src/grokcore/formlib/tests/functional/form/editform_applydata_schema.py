@@ -54,10 +54,12 @@ And finally let's change both fields:
   True
 
 """
-import grokcore.formlib as grok
 from zope import schema
-from zope.interface import Interface, implementer
+from zope.interface import Interface
+from zope.interface import implementer
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
+
+import grokcore.formlib as grok
 
 
 class IMammoth(Interface):

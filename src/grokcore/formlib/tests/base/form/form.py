@@ -32,9 +32,11 @@ It is important to keep the order of the fields:
   ['size', 'name']
 
 """
-import grokcore.formlib as grok
 from zope import schema
-from zope.interface import Interface, implementer
+from zope.interface import Interface
+from zope.interface import implementer
+
+import grokcore.formlib as grok
 
 
 class IMammoth(Interface):
