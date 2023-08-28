@@ -132,8 +132,6 @@ Base classes
   Extends ``Form`` to create add forms. You have to provide the *add*
   action which is going to create the new object.
 
-
-
 Decorators
 ----------
 
@@ -158,9 +156,9 @@ Helpers
 Additionally, the ``grokcore.formlib`` package exposes the
 `grokcore.component`_, `grokcore.security`_ and `grokcore.view`_ APIs.
 
-.. _grokcore.component: http://pypi.python.org/pypi/grokcore.component
-.. _grokcore.formlib: http://pypi.python.org/pypi/grokcore.formlib
-.. _grokcore.security: http://pypi.python.org/pypi/grokcore.security
-.. _grokcore.view: http://pypi.python.org/pypi/grokcore.view
+.. _grokcore.component: https://pypi.org/project/grokcore.component
+.. _grokcore.formlib: https://pypi.org/project/grokcore.formlib
+.. _grokcore.security: https://pypi.org/project/grokcore.security
+.. _grokcore.view: https://pypi.org/project/grokcore.view
 
 

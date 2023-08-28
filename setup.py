@@ -5,13 +5,14 @@ from setuptools import setup
 
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
+        return f.read()
 
 
 long_description = (
-    read('README.txt')
+    read('README.rst')
     + '\n' +
-    read('CHANGES.txt')
+    read('CHANGES.rst')
 )
 
 tests_require = [
@@ -25,13 +26,14 @@ setup(
     name='grokcore.formlib',
     version='4.0.dev0',
     author='Grok Team',
-    author_email='grok-dev@zope.org',
-    url='http://grok.zope.org',
-    download_url='http://cheeseshop.python.org/pypi/grokcore.formlib',
+    author_email='zope-dev@zope.dev',
+    url='https://github.com/zopefoundation/grokcore.formlib',
+    download_url='https://pypi.org/project/grokcore.formlib',
     description='Grok-like configuration for zope.formlib components',
     long_description=long_description,
     license='ZPL',
     classifiers=[
+        'Development Status :: 6 - Mature',
         'Environment :: Web Environment',
         'Framework :: Zope :: 3',
         'Intended Audience :: Developers',
@@ -52,6 +54,7 @@ setup(
     namespace_packages=['grokcore'],
     include_package_data=True,
     zip_safe=False,
+    python_requires='>=3.7',
     install_requires=[
         'setuptools',
         'grokcore.component >= 2.1',
@@ -62,12 +65,11 @@ setup(
         'pytz',
         'zope.container',
         'zope.event',
-        'zope.formlib >= 4.3.0a2.dev0',
+        'zope.formlib >= 4.3.0',
         'zope.interface',
         'zope.lifecycleevent',
         'zope.publisher',
         'zope.schema',
     ],
-    tests_require=tests_require,
     extras_require={'test': tests_require},
 )
