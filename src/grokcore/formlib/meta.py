@@ -13,10 +13,10 @@
 ##############################################################################
 """Grokkers for the various components."""
 
+import grokcore.component
 import martian
 from martian.error import GrokError
 
-import grokcore.component
 from grokcore.formlib import components
 from grokcore.formlib import formlib
 

@@ -13,12 +13,11 @@
 ##############################################################################
 """Grok interfaces
 """
+from grokcore.view.interfaces import IGrokView
 from zope.formlib.interfaces import reConstraint
 from zope.interface import Attribute
 from zope.interface import Interface
 from zope.schema import ASCII
-
-from grokcore.view.interfaces import IGrokView
 
 
 class IGrokForm(IGrokView):
