@@ -13,15 +13,14 @@
 ##############################################################################
 """Grok test helpers
 """
-import martian
-from martian.error import GrokError
-from zope.configuration.config import ConfigurationMachine
-
 import grokcore.security
+import martian
 from grokcore.component import Context
 from grokcore.component import zcml
 from grokcore.security.util import protect_getattr
 from grokcore.security.util import protect_setattr
+from martian.error import GrokError
+from zope.configuration.config import ConfigurationMachine
 
 
 # Below is a simple grokker + directives that allow you to protect
