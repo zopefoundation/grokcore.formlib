@@ -19,6 +19,8 @@ import warnings
 
 import pytz
 
+from grokcore.view import PageTemplateFile
+from grokcore.view import View
 from zope.formlib import form
 from zope.interface import implementer_only
 from zope.interface.common import idatetime
@@ -26,8 +28,6 @@ from zope.publisher.publish import mapply
 
 from grokcore.formlib import formlib
 from grokcore.formlib.interfaces import IGrokForm
-from grokcore.view import PageTemplateFile
-from grokcore.view import View
 
 
 default_form_template = PageTemplateFile(os.path.join(
